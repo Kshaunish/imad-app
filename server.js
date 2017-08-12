@@ -130,10 +130,10 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 var names= [];
-app.get('/submit-name/:name', function(req, res){
+app.get('/submit-name', function(req, res){// URL: /submit-name?name=xxxxx 
 //Get the name from request
 
-var name = req.params.name;//TODO
+var name = req.query.name;//TODO
 
 names.push(name);
 res.send(JSON.stringify(names));//TODO
