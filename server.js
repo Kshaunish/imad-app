@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 
-var content = {
+var articleOne = {
     title: 'Article One | Kshaunish Roy',
     heading: 'Article One',
     date: 'Aug 12,2017',
@@ -67,7 +67,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/article-one',function(req,res) {
- res.send(createTemplate(article-one));
+ res.send(createTemplate(articleOne));
 });
 
 app.get('/article-two',function(req,res) {
