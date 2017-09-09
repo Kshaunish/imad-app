@@ -15,63 +15,6 @@ var app = express();
 app.use(morgan('combined'));
 
 
-var articles = {
-    'article-one': {
-        title: 'Article One | Kshaunish Roy',
-        heading: 'Article One',
-        date: 'Aug 12,2017',
-        content:`   
-            <p>
-                This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.
-            </p>
-            <p>
-                This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.
-            </p>
-            <p>
-                This is the content for my first article.This is the content for my first article.This is the content for my first article.
-                    This is the content for my first article.This is the content for my first article.This is the content for my first article.
-            </p>`
-        
-    },
-    'article-two': { title: 'Article Two | Kshaunish Roy',
-        heading: 'Article Two',
-        date: 'Aug 12,2017',
-        content:`   
-            <p>
-                This is the content for my 2nd article.This is the content for my 2nd article.
-                 This is the content for my 2nd article.This is the content for my 2nd article.
-            </p>
-            <p>
-                This is the content for my 2nd article.This is the content for my 2nd article.
-                 This is the content for my 2nd article.This is the content for my 2nd article.
-            </p>
-            <p>
-                This is the content for my 2nd article.This is the content for my 2nd article.
-                 This is the content for my 2nd article.This is the content for my 2nd article.
-            </p>
-            `},
-    'article-three': {
-        title: 'Article Three | Kshaunish Roy',
-        heading: 'Article Three',
-        date: 'Aug 12,2017',
-        content:`   
-            <p>
-                This is the content for my 3rd article.This is the content for my 3rd article.
-                This is the content for my 3rd article.This is the content for my 3rd article.
-                </p>
-                <p>
-                This is the content for my 3rd article.This is the content for my 3rd article.
-                This is the content for my 3rd article.This is the content for my 3rd article.
-                </p>
-                <p>
-                This is the content for my 3rd article.This is the content for my 3rd article.
-                This is the content for my 3rd article.This is the content for my 3rd article.
-            </p>
-            `}
-}
-
 function createTemplate (data) {
 var title = data.title;
 var date = data.date;
@@ -147,7 +90,7 @@ app.get('/articles/:articleName',function(req,res) {
     //articles[articleName] == {} content object for article one
  
  
- pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function (err, result) {
+ pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function (err, result) {
      if (err) {
            res.status(500).send(err.toString());
        } else {
